@@ -69,8 +69,10 @@ const menu = [
 const menuWrapper = document.querySelector(".menu-wrapper");
 
 /* ---- FUNCTIONS ---- */
-let displayMenu = menu.map(function (item) {
-  return `<article class="menu-item">
+
+function displayMenu(menuItems) {
+  let displayMenu = menuItems.map(function (item) {
+    return `<article class="menu-item">
             <img src=${item.img} class="photo" alt=${item.title} />
              <div class="item-info">
                 <header>
@@ -80,7 +82,11 @@ let displayMenu = menu.map(function (item) {
                 <p class="item-text">${item.desc}</p>
              </div>
           </article>`;
-});
-displayMenu = displayMenu.join("");
+  });
+  displayMenu = displayMenu.join("");
 
-menuWrapper.innerHTML = displayMenu;
+  menuWrapper.innerHTML = displayMenu;
+}
+
+// call function
+displayMenu(menu);
