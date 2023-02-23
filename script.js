@@ -64,16 +64,23 @@ const menu = [
     img: "./images/item-8.jpeg",
     desc: `on it tumblr kickstarter thundercats migas everyday carry squid palo santo leggings. Food truck truffaut  `,
   },
-  {
-    id: 9,
-    title: "quarantine buddy",
-    category: "shakes",
-    price: 16.99,
-    img: "./images/item-9.jpeg",
-    desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
-  },
 ];
 
-/* ---- FUNCTIONS ---- */
+const menuWrapper = document.querySelector(".menu-wrapper");
 
-console.log("hello world");
+/* ---- FUNCTIONS ---- */
+let displayMenu = menu.map(function (item) {
+  return `<article class="menu-item">
+            <img src=${item.img} class="photo" alt=${item.title} />
+             <div class="item-info">
+                <header>
+                 <h4>${item.title}</h4>
+                 <h4 class="price">${item.price}</h4>
+                </header>
+                <p class="item-text">${item.desc}</p>
+             </div>
+          </article>`;
+});
+displayMenu = displayMenu.join("");
+
+menuWrapper.innerHTML = displayMenu;
