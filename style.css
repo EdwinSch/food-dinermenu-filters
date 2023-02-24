@@ -62,6 +62,7 @@ h2 {
   background: transparent;
   border-color: var(--gold);
   font-size: 1rem;
+  font-weight: 600;
   text-transform: capitalize;
   margin: 0 0.5rem;
   letter-spacing: 1px;

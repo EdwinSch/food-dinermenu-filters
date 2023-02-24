@@ -67,9 +67,11 @@ const menu = [
 ];
 
 const menuWrapper = document.querySelector(".menu-wrapper");
+const filterBtns = document.querySelectorAll(".filter-btn");
 
 /* ---- FUNCTIONS ---- */
 
+// Map/load menu
 function displayMenu(menuItems) {
   let displayMenu = menuItems.map(function (item) {
     return `<article class="menu-item">
@@ -88,5 +90,22 @@ function displayMenu(menuItems) {
   menuWrapper.innerHTML = displayMenu;
 }
 
-// call function
+// Filter buttons
+filterBtns.forEach((btn) => {
+  btn.addEventListener("click", function (event) {
+    const category = event.currentTarget.dataset.id;
+    const menuCategory = menu.filter(function (menuItem) {
+      if (menuItem.category === category) {
+        return menuItem;
+      }
+    });
+    if (category === "all") {
+      displayMenu(menu);
+    } else {
+      displayMenu(menuCategory);
+    }
+  });
+});
+
+// Call load menu function
 displayMenu(menu);
