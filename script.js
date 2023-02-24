@@ -64,33 +64,51 @@ const menu = [
     img: "./images/item-8.jpeg",
     desc: `on it tumblr kickstarter thundercats migas everyday carry squid palo santo leggings. Food truck truffaut  `,
   },
+  {
+    id: 9,
+    title: "ribs",
+    category: "dinner",
+    price: 19.99,
+    img: "./images/item-9.jpg",
+    desc: `vaporware iPhone mumblecore selvage raw denim slow-carb leggings gochujang helvetica man braid jianbing. Marfa thundercats`,
+  },
+  {
+    id: 10,
+    title: "steak",
+    category: "dinner",
+    price: 25.99,
+    img: "./images/item-10.jpeg",
+    desc: `franzen vegan pabst bicycle rights kickstarter migas everyday carry squid palo santo leggings. Food truck truffaut  `,
+  },
 ];
 
 const menuWrapper = document.querySelector(".menu-wrapper");
-const filterBtns = document.querySelectorAll(".filter-btn");
+const btnContainer = document.querySelector(".btn-container");
 
 /* ---- FUNCTIONS ---- */
 
-// Map/load menu
-function displayMenu(menuItems) {
-  let displayMenu = menuItems.map(function (item) {
-    return `<article class="menu-item">
-            <img src=${item.img} class="photo" alt=${item.title} />
-             <div class="item-info">
-                <header>
-                 <h4>${item.title}</h4>
-                 <h4 class="price">${item.price}</h4>
-                </header>
-                <p class="item-text">${item.desc}</p>
-             </div>
-          </article>`;
-  });
-  displayMenu = displayMenu.join("");
+// Reduce unique categories from menu data for dynamic buttons
+const categories = menu.reduce(
+  function (values, item) {
+    if (!values.includes(item.category)) {
+      values.push(item.category);
+    }
+    return values;
+  },
+  ["all"]
+);
 
-  menuWrapper.innerHTML = displayMenu;
-}
+// Map/load buttons
+const categoryBtns = categories
+  .map(function (category) {
+    return `<button class="filter-btn" type="button" data-id=${category}>${category}</button>`;
+  })
+  .join("");
 
-// Filter buttons
+btnContainer.innerHTML = categoryBtns;
+const filterBtns = document.querySelectorAll(".filter-btn");
+
+// Filter buttons functionality
 filterBtns.forEach((btn) => {
   btn.addEventListener("click", function (event) {
     const category = event.currentTarget.dataset.id;
@@ -106,6 +124,25 @@ filterBtns.forEach((btn) => {
     }
   });
 });
+
+// Map/load menu
+function displayMenu(menuItems) {
+  let displayMenu = menuItems.map(function (item) {
+    return `<article class="menu-item">
+            <img src=${item.img} class="photo" alt=${item.title} />
+             <div class="item-info">
+                <header>
+                 <h4>${item.title}</h4>
+                 <h4 class="price">&dollar; ${item.price}</h4>
+                </header>
+                <p class="item-text">${item.desc}</p>
+             </div>
+          </article>`;
+  });
+  displayMenu = displayMenu.join("");
+
+  menuWrapper.innerHTML = displayMenu;
+}
 
 // Call load menu function
 displayMenu(menu);

@@ -1,5 +1,3 @@
-## Heading/Title
+### Food Menu
 
-Lorem Ipsum
-
-🚀 [SOME LINK](https://google.com)
+Practice project to create a food menu with dynamically filled content and functional filter buttons.
